@@ -18,5 +18,19 @@ namespace Winform_app
         {
             InitializeComponent();
         }
+
+        private void frmArticulos_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                ArticuloBusiness business = new ArticuloBusiness();
+                dgvArticulos.DataSource = business.listarArticulo();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
     }
 }
