@@ -15,7 +15,7 @@ namespace Business
             DataAccess data = new DataAccess();
             try
             {
-                data.setearConsulta("select Codigo,Nombre, Descripcion, ImagenUrl from ARTICULOS");
+                data.setearConsulta("select A.Codigo,A.Nombre, A.Descripcion, A.ImagenUrl, M.Descripcion marca, C.Descripcion categoria, A.Precio from Articulos as A , MARCAS as M, CATEGORIAS as C where A.IdMarca = M.Id and A.IdCategoria = C.Id");
                 data.ejecutarLectura();
 
                 //si hay un registro,una fila, va a recorrer los valores de esa fila, osea las columnas.
@@ -26,6 +26,16 @@ namespace Business
                     aux.Nombre = (string)data.Reader["Nombre"];
                     aux.Descripcion = (string)data.Reader["Descripcion"];
                     aux.ImagenUrl = (string)data.Reader["ImagenUrl"];
+                    aux.Precio = (decimal)data.Reader["Precio"];
+
+                    aux.Marca = new Marca();
+                    
+                    aux.Marca.Descripcion = (string)data.Reader["marca"];
+
+                    aux.Categoria = new Categoria();
+
+                    aux.Categoria.Descripcion = (string)data.Reader["categoria"];
+                    
 
                     listaArticulo.Add(aux);
 

@@ -30,6 +30,7 @@ namespace Winform_app
                 articuloList = business.listarArticulo();
                 dgvArticulos.DataSource = articuloList;
                 cargarImagen(articuloList[0].ImagenUrl);
+                ocultarColumnas();
 
 
             }
@@ -69,6 +70,12 @@ namespace Winform_app
                 pbxArticulos.Load("https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png");
 
             }
+        }
+
+        private void ocultarColumnas()
+        {
+            dgvArticulos.Columns["ImagenUrl"].Visible = false;
+            dgvArticulos.Columns["Id"].Visible = false;
         }
     }
 }
