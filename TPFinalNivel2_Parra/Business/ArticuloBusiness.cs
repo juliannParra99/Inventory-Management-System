@@ -11,7 +11,7 @@ namespace Business
     {
         public List<Articulo> listarArticulo()
         {
-            List<Articulo> listaArticulo = new List<Articulo>();
+            List<Articulo> listaArticulos = new List<Articulo>();
             DataAccess data = new DataAccess();
             try
             {
@@ -37,10 +37,33 @@ namespace Business
                     aux.Categoria.Descripcion = (string)data.Reader["categoria"];
                     
 
-                    listaArticulo.Add(aux);
+                    listaArticulos.Add(aux);
 
                 }
-                return listaArticulo;
+                return listaArticulos;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                data.cerrarConexion();
+            }
+        }
+
+        public void agregarArticulo(Articulo nuevo)
+        {
+            DataAccess data = new DataAccess();
+            try
+            {
+                data.setearConsulta("insert into ARTICULOS (Codigo,Nombre,Descripcion,Precio)values(@Codigo, @Nombre ,@Descripcion, @Precio)");
+                data.setearConsulta("@Codigo", nuevo.Codigo);
+                data.setearConsulta("@Nombre", nuevo.Nombre);
+                data.setearConsulta("@Descripcion", nuevo.Descripcion);
+                data.setearConsulta("@Precio", nuevo.Precio);
+                data.ejecutarAccion();
             }
             catch (Exception ex)
             {

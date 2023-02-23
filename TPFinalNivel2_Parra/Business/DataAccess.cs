@@ -58,6 +58,29 @@ namespace Business
             connection.Close();
         }
 
+        //ejecuta acciones Sql que son de tipo NO consulta, como insert.
+        public void ejecutarAccion()
+        {
+            command.Connection = connection;
+            try
+            {
+                connection.Open();
+
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        //configura consultas sql con parametro con prefijo '@'
+        public void setearConsulta(string parameter, object value)
+        {
+            command.Parameters.AddWithValue(parameter, value);
+        }
+
     }
 }
 
