@@ -35,8 +35,12 @@ namespace Winform_app
                 nuevoArticulo.Descripcion = txtDescripcion.Text;
                 nuevoArticulo.Precio = decimal.Parse(txtPrecio.Text);
 
-                ArticuloBusiness business = new ArticuloBusiness();
-                business.agregarArticulo(nuevoArticulo);
+                nuevoArticulo.Categoria = (Categoria)cbxCategoria.SelectedItem;
+
+                nuevoArticulo.Marca = (Marca)cbxMarca.SelectedItem;
+
+                ArticuloBusiness businessArticulo = new ArticuloBusiness();
+                businessArticulo.agregarArticulo(nuevoArticulo);
 
                 MessageBox.Show("Agregado exitosamente");
                 Close();
@@ -49,6 +53,23 @@ namespace Winform_app
             }
 
             
+        }
+
+        private void frmAltaArticulo_Load(object sender, EventArgs e)
+        {
+            CategoriaBusiness categoriaBusiness = new CategoriaBusiness();
+            MarcaBusiness marcaBusiness = new MarcaBusiness();
+            try
+            {
+                cbxCategoria.DataSource = categoriaBusiness.listarCategoria();
+                cbxMarca.DataSource = marcaBusiness.listarMarca(); 
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }

@@ -58,10 +58,13 @@ namespace Business
             DataAccess data = new DataAccess();
             try
             {
-                data.setearConsulta("insert into ARTICULOS (Codigo,Nombre,Descripcion,Precio)values(@Codigo, @Nombre ,@Descripcion, @Precio)");
+                data.setearConsulta("insert into ARTICULOS (Codigo,Nombre,Descripcion,IdMarca,IdCategoria,Precio)values(@Codigo, @Nombre ,@Descripcion,@Marca, @Categoria, @Precio)");
                 data.setearConsulta("@Codigo", nuevo.Codigo);
                 data.setearConsulta("@Nombre", nuevo.Nombre);
                 data.setearConsulta("@Descripcion", nuevo.Descripcion);
+                //uso el id, por que el enlace entre tables es mediante el Id.
+                data.setearConsulta("@Marca", nuevo.Marca.Id);
+                data.setearConsulta("@Categoria", nuevo.Categoria.Id);
                 data.setearConsulta("@Precio", nuevo.Precio);
                 data.ejecutarAccion();
             }
