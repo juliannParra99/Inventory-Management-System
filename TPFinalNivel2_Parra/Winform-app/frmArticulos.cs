@@ -24,15 +24,19 @@ namespace Winform_app
 
         private void frmArticulos_Load(object sender, EventArgs e)
         {
+            agregarArticulos();
+        }
+
+        //metodo que centraliza el mostrar las listas de articulos.
+        private void agregarArticulos()
+        {
+            ArticuloBusiness business = new ArticuloBusiness();
             try
             {
-                ArticuloBusiness business = new ArticuloBusiness();
                 articuloList = business.listarArticulo();
                 dgvArticulos.DataSource = articuloList;
                 cargarImagen(articuloList[0].ImagenUrl);
                 ocultarColumnas();
-
-
             }
             catch (Exception ex)
             {
@@ -82,6 +86,7 @@ namespace Winform_app
         {
             frmAltaArticulo alta = new frmAltaArticulo();
             alta.ShowDialog();
+            agregarArticulos();
         }
     }
 }
