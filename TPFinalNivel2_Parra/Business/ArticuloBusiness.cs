@@ -25,15 +25,19 @@ namespace Business
                     aux.Codigo = (string)data.Reader["Codigo"];
                     aux.Nombre = (string)data.Reader["Nombre"];
                     aux.Descripcion = (string)data.Reader["Descripcion"];
-                    aux.ImagenUrl = (string)data.Reader["ImagenUrl"];
+
+                    //validacion dbNull de column imagenUrl: solo lee si no esta nula el registro en la columna
+                    if (!(data.Reader["ImagenUrl"] is DBNull))
+                    {
+                        aux.ImagenUrl = (string)data.Reader["ImagenUrl"];
+                    }
+
                     aux.Precio = (decimal)data.Reader["Precio"];
 
                     aux.Marca = new Marca();
-                    
                     aux.Marca.Descripcion = (string)data.Reader["marca"];
 
                     aux.Categoria = new Categoria();
-
                     aux.Categoria.Descripcion = (string)data.Reader["categoria"];
                     
 
