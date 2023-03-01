@@ -34,6 +34,7 @@ namespace Winform_app
                 nuevoArticulo.Nombre= txtNombre.Text;
                 nuevoArticulo.Descripcion = txtDescripcion.Text;
                 nuevoArticulo.Precio = decimal.Parse(txtPrecio.Text);
+                nuevoArticulo.ImagenUrl = txtUrlImagen.Text;
 
                 nuevoArticulo.Categoria = (Categoria)cbxCategoria.SelectedItem;
 
@@ -69,6 +70,26 @@ namespace Winform_app
             {
 
                 MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void txtUrlImagen_Leave(object sender, EventArgs e)
+        {
+            cargarImagen(txtUrlImagen.Text);
+        }
+
+        //Metodo para cargar imagen
+        private void cargarImagen(string imagen)
+        {
+            try
+            {
+                pbxArticulos.Load(imagen);
+
+            }
+            catch (Exception)
+            {
+                pbxArticulos.Load("https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png");
+
             }
         }
     }
