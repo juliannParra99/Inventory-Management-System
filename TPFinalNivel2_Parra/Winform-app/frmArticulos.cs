@@ -50,9 +50,13 @@ namespace Winform_app
         {
             try
             {
-                Articulo seleccionadoRow;
-                seleccionadoRow = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
-                cargarImagen(seleccionadoRow.ImagenUrl);
+                //validacion por si se intenta leer algo que esta nulo en el DGV, como cuando se usa el filtro
+                if (dgvArticulos.CurrentRow != null)
+                {
+                    Articulo seleccionadoRow;
+                    seleccionadoRow = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+                    cargarImagen(seleccionadoRow.ImagenUrl);
+                }
             }
             catch (Exception ex)
             {
@@ -121,6 +125,34 @@ namespace Winform_app
             {
 
                 MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void txtFiltro_TextChanged(object sender, EventArgs e)
+        {
+            List<Articulo> listaFiltrada;
+            string filtro = txtFiltro.Text;
+            //se usa la lista declarada privada al inicio, para crear una nueva lista. Y se utiliza el filtro si 'filtro' no esta vacio
+            try
+            {
+                if (filtro != "")
+                {
+                    listaFiltrada = articuloList.FindAll(x => x.Codigo.ToUpper().Contains(filtro.ToUpper()));
+
+                }
+                else
+                {
+                    listaFiltrada = articuloList;
+                }
+
+                dgvArticulos.DataSource = null;
+                dgvArticulos.DataSource = listaFiltrada;
+                ocultarColumnas();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
             }
         }
     }
