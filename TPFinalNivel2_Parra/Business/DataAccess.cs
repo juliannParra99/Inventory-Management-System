@@ -58,7 +58,7 @@ namespace Business
             connection.Close();
         }
 
-        //ejecuta acciones Sql que son de tipo NO consulta, como insert.
+        //ejecuta acciones Sql que son de tipo NO consulta, como insert,delete, update.
         public void ejecutarAccion()
         {
             command.Connection = connection;

@@ -116,5 +116,21 @@ namespace Business
                 data.cerrarConexion();
             }
         }
+
+        public void eliminar(int id)
+        {
+            try
+            {
+                DataAccess data = new DataAccess();
+                data.setearConsulta("delete from  articulos where id = @id");
+                data.setearParametro("@id",id);
+                data.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }

@@ -99,5 +99,29 @@ namespace Winform_app
             modificar.ShowDialog();
             agregarArticulos();
         }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            ArticuloBusiness business = new ArticuloBusiness();
+            Articulo articuloSeleccionado;
+            try
+            {
+                //se valida si realmente se quiere borrar el registro capturando el valor elegido en los botones del messageBox en la variable Resultado
+                DialogResult resultado = MessageBox.Show("¿Estas seguro que queres eliminar este registro?", "Eliminar Registro", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (resultado == DialogResult.Yes)
+                {
+                    articuloSeleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+                    business.eliminar(articuloSeleccionado.Id);
+                    agregarArticulos();
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
     }
 }
