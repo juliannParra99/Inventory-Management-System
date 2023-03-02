@@ -14,9 +14,18 @@ namespace Winform_app
 {
     public partial class frmAltaArticulo : Form
     {
+        private Articulo articulo = null;
+
         public frmAltaArticulo()
         {
             InitializeComponent();
+        }
+        //sobrecarga de constructor
+        public frmAltaArticulo( Articulo articulo)
+        {
+            InitializeComponent();
+            Text = "Modificar Articulo";
+            this.articulo = articulo;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -26,24 +35,39 @@ namespace Winform_app
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            Articulo nuevoArticulo = new Articulo();
+            //se utiliza el atributo 'articulo' tanto para agregar como para modificar: mediante validacion
+            //si no es nulo esta toco el boton 'modificar'
+            ArticuloBusiness businessArticulo = new ArticuloBusiness();
 
             try
             {
-                nuevoArticulo.Codigo = txtCodigo.Text;
-                nuevoArticulo.Nombre= txtNombre.Text;
-                nuevoArticulo.Descripcion = txtDescripcion.Text;
-                nuevoArticulo.Precio = decimal.Parse(txtPrecio.Text);
-                nuevoArticulo.ImagenUrl = txtUrlImagen.Text;
+                if (articulo == null)
+                {
+                    articulo = new Articulo();
+                }
+                articulo.Codigo = txtCodigo.Text;
+                articulo.Nombre= txtNombre.Text;
+                articulo.Descripcion = txtDescripcion.Text;
+                articulo.Precio = decimal.Parse(txtPrecio.Text);
+                articulo.ImagenUrl = txtUrlImagen.Text;
 
-                nuevoArticulo.Categoria = (Categoria)cbxCategoria.SelectedItem;
+                articulo.Categoria = (Categoria)cbxCategoria.SelectedItem;
 
-                nuevoArticulo.Marca = (Marca)cbxMarca.SelectedItem;
+                articulo.Marca = (Marca)cbxMarca.SelectedItem;
 
-                ArticuloBusiness businessArticulo = new ArticuloBusiness();
-                businessArticulo.agregarArticulo(nuevoArticulo);
+                //se valida con la propiedad Id: si el articulo existia, ya tenia un Id, por lo que es una modificacion.
+                if (articulo.Id != 0)
+                {
+                    businessArticulo.modificarArticulo(articulo);
+                    MessageBox.Show("Modificado exitosamente");
+                }
+                else
+                {
+                    businessArticulo.agregarArticulo(articulo);
+                    MessageBox.Show("Agregado exitosamente");
+                }
 
-                MessageBox.Show("Agregado exitosamente");
+
                 Close();
 
             }
@@ -63,8 +87,23 @@ namespace Winform_app
             try
             {
                 cbxCategoria.DataSource = categoriaBusiness.listarCategoria();
-                cbxMarca.DataSource = marcaBusiness.listarMarca(); 
+                cbxCategoria.ValueMember = "Id";
+                cbxCategoria.DisplayMember = "Descripcion";
+                cbxMarca.DataSource = marcaBusiness.listarMarca();
+                cbxMarca.ValueMember = "Id";
+                cbxMarca.DisplayMember = "Descripcion";
 
+                if (articulo != null)
+                {
+                    txtCodigo.Text = articulo.Codigo;
+                    txtNombre.Text = articulo.Nombre;
+                    txtDescripcion.Text = articulo.Descripcion;
+                    txtPrecio.Text = articulo.Precio.ToString();
+                    txtUrlImagen.Text = articulo.ImagenUrl;
+                    cargarImagen(articulo.ImagenUrl);
+                    cbxCategoria.SelectedValue = articulo.Categoria.Id;
+                    cbxMarca.SelectedValue = articulo.Marca.Id;
+                }
             }
             catch (Exception ex)
             {

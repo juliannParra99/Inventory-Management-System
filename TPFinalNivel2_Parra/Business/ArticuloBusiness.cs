@@ -15,13 +15,14 @@ namespace Business
             DataAccess data = new DataAccess();
             try
             {
-                data.setearConsulta("select A.Codigo,A.Nombre, A.Descripcion, A.ImagenUrl, M.Descripcion marca, C.Descripcion categoria, A.Precio from Articulos as A , MARCAS as M, CATEGORIAS as C where A.IdMarca = M.Id and A.IdCategoria = C.Id");
+                data.setearConsulta("select A.Codigo,A.Nombre, A.Descripcion, A.ImagenUrl, M.Descripcion marca, C.Descripcion categoria, A.Precio,A.IdCategoria,A.IdMarca,A.Id from Articulos as A , MARCAS as M, CATEGORIAS as C where A.IdMarca = M.Id and A.IdCategoria = C.Id");
                 data.ejecutarLectura();
 
                 //si hay un registro,una fila, va a recorrer los valores de esa fila, osea las columnas.
                 while (data.Reader.Read())
                 {
                     Articulo aux = new Articulo();
+                    aux.Id = (int)data.Reader["Id"];
                     aux.Codigo = (string)data.Reader["Codigo"];
                     aux.Nombre = (string)data.Reader["Nombre"];
                     aux.Descripcion = (string)data.Reader["Descripcion"];
@@ -34,10 +35,13 @@ namespace Business
 
                     aux.Precio = (decimal)data.Reader["Precio"];
 
+                    //se agregan id de marca y categoria
                     aux.Marca = new Marca();
+                    aux.Marca.Id = (int)data.Reader["IdMarca"];
                     aux.Marca.Descripcion = (string)data.Reader["marca"];
 
                     aux.Categoria = new Categoria();
+                    aux.Categoria.Id = (int)data.Reader["IdCategoria"];
                     aux.Categoria.Descripcion = (string)data.Reader["categoria"];
                     
 
@@ -63,14 +67,14 @@ namespace Business
             try
             {
                 data.setearConsulta("insert into ARTICULOS (Codigo,Nombre,Descripcion,IdMarca,IdCategoria,Precio, ImagenUrl)values(@Codigo, @Nombre ,@Descripcion,@Marca, @Categoria, @Precio, @UrlImagen)");
-                data.setearConsulta("@Codigo", nuevo.Codigo);
-                data.setearConsulta("@Nombre", nuevo.Nombre);
-                data.setearConsulta("@Descripcion", nuevo.Descripcion);
+                data.setearParametro("@Codigo", nuevo.Codigo);
+                data.setearParametro("@Nombre", nuevo.Nombre);
+                data.setearParametro("@Descripcion", nuevo.Descripcion);
                 //uso el id, por que el enlace entre tables es mediante el Id.
-                data.setearConsulta("@Marca", nuevo.Marca.Id);
-                data.setearConsulta("@Categoria", nuevo.Categoria.Id);
-                data.setearConsulta("@Precio", nuevo.Precio);
-                data.setearConsulta("@UrlImagen", nuevo.ImagenUrl);
+                data.setearParametro("@Marca", nuevo.Marca.Id);
+                data.setearParametro("@Categoria", nuevo.Categoria.Id);
+                data.setearParametro("@Precio", nuevo.Precio);
+                data.setearParametro("@UrlImagen", nuevo.ImagenUrl);
                 data.ejecutarAccion();
             }
             catch (Exception ex)
@@ -84,6 +88,33 @@ namespace Business
             }
         }
 
+        public void modificarArticulo(Articulo articulo)
+        {
+            DataAccess data = new DataAccess();
 
+            try
+            {
+                data.setearConsulta("update ARTICULOS set Codigo = @cod, Nombre = @nom, Descripcion = @desc, IdMarca = @idMarca, IdCategoria = @idCategoria , ImagenUrl = @Img , Precio = @Precio where Id = @id");
+                data.setearParametro("@cod", articulo.Codigo);
+                data.setearParametro("@nom", articulo.Nombre);
+                data.setearParametro("@desc", articulo.Descripcion);
+                data.setearParametro("@idMarca", articulo.Marca.Id);
+                data.setearParametro("@idCategoria", articulo.Categoria.Id);
+                data.setearParametro("@Img", articulo.ImagenUrl);
+                data.setearParametro("@Precio", articulo.Precio);
+                data.setearParametro("@id", articulo.Id);
+
+                data.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                data.cerrarConexion();
+            }
+        }
     }
 }

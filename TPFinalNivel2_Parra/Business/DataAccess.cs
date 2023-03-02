@@ -76,7 +76,7 @@ namespace Business
         }
 
         //configura consultas sql con parametro con prefijo '@'
-        public void setearConsulta(string parameter, object value)
+        public void setearParametro(string parameter, object value)
         {
             command.Parameters.AddWithValue(parameter, value);
         }

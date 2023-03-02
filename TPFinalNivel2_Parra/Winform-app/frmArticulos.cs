@@ -88,5 +88,16 @@ namespace Winform_app
             alta.ShowDialog();
             agregarArticulos();
         }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            //obtiene el objeto de la fila seleccionada  de la dgvArticulos 
+            Articulo articuloSeleccionado;
+            articuloSeleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+
+            frmAltaArticulo modificar = new frmAltaArticulo(articuloSeleccionado);
+            modificar.ShowDialog();
+            agregarArticulos();
+        }
     }
 }
