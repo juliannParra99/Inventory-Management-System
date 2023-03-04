@@ -9,12 +9,17 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Domain;
 using Business;
+using System.IO;
+using System.Configuration;
 
 namespace Winform_app
 {
     public partial class frmAltaArticulo : Form
     {
         private Articulo articulo = null;
+
+        //para manejar los archivos de imagenes locales
+        private OpenFileDialog archivo = null;
 
         public frmAltaArticulo()
         {
@@ -66,6 +71,13 @@ namespace Winform_app
                     businessArticulo.agregarArticulo(articulo);
                     MessageBox.Show("Agregado exitosamente");
                 }
+                
+                //Validacion para guardar imagen local en carpeta local 
+                if (archivo != null && !(txtUrlImagen.Text.ToUpper().Contains("HTTP")))
+                {
+                    File.Copy(archivo.FileName, ConfigurationManager.AppSettings["Inventory-Management-System-App"] + archivo.SafeFileName);
+                }
+                    
 
 
                 Close();
@@ -129,6 +141,20 @@ namespace Winform_app
             {
                 pbxArticulos.Load("https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png");
 
+            }
+        }
+
+        //permite cargar imagen local
+        private void btnAgregarImagen_Click(object sender, EventArgs e)
+        {
+            archivo = new OpenFileDialog();
+            archivo.Filter = "jpg|*.jpg;|png|*.png";
+            if (archivo.ShowDialog() == DialogResult.OK)
+            {
+                txtUrlImagen.Text = archivo.FileName;
+                cargarImagen(archivo.FileName);
+
+                
             }
         }
     }

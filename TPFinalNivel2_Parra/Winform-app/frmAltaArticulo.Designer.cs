@@ -46,6 +46,7 @@ namespace Winform_app
             this.txtUrlImagen = new System.Windows.Forms.TextBox();
             this.lblUrlImagen = new System.Windows.Forms.Label();
             this.pbxArticulos = new System.Windows.Forms.PictureBox();
+            this.btnAgregarImagen = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbxArticulos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -195,11 +196,22 @@ namespace Winform_app
             this.pbxArticulos.TabIndex = 15;
             this.pbxArticulos.TabStop = false;
             // 
+            // btnAgregarImagen
+            // 
+            this.btnAgregarImagen.Location = new System.Drawing.Point(302, 183);
+            this.btnAgregarImagen.Name = "btnAgregarImagen";
+            this.btnAgregarImagen.Size = new System.Drawing.Size(21, 20);
+            this.btnAgregarImagen.TabIndex = 16;
+            this.btnAgregarImagen.Text = "+";
+            this.btnAgregarImagen.UseVisualStyleBackColor = true;
+            this.btnAgregarImagen.Click += new System.EventHandler(this.btnAgregarImagen_Click);
+            // 
             // frmAltaArticulo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(545, 450);
+            this.Controls.Add(this.btnAgregarImagen);
             this.Controls.Add(this.pbxArticulos);
             this.Controls.Add(this.lblUrlImagen);
             this.Controls.Add(this.txtUrlImagen);
@@ -246,5 +258,6 @@ namespace Winform_app
         private System.Windows.Forms.TextBox txtUrlImagen;
         private System.Windows.Forms.Label lblUrlImagen;
         private System.Windows.Forms.PictureBox pbxArticulos;
+        private System.Windows.Forms.Button btnAgregarImagen;
     }
 }
