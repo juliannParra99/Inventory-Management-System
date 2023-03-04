@@ -14,9 +14,15 @@ namespace Winform_app
 {
     public partial class frmArticulos : Form
     {
-        //se va utilizar varias veces este atributo
-
+        //se va utilizar varias veces este atributo cuando se requiera una lista
         private List<Articulo> articuloList;
+
+        //atributos de items de comboBox
+        private string precioItemCbx;
+        private string marcaItemCbx;
+        private string categoriaItemCbx;
+        private string descripcionCbx;
+
         public frmArticulos()
         {
             InitializeComponent();
@@ -25,6 +31,15 @@ namespace Winform_app
         private void frmArticulos_Load(object sender, EventArgs e)
         {
             agregarArticulos();
+            precioItemCbx = "Precio";
+            marcaItemCbx = "Marca";
+            categoriaItemCbx = "Categoria";
+            descripcionCbx = "Descripcion";
+            cbxCampo.Items.Add(precioItemCbx);
+            cbxCampo.Items.Add(marcaItemCbx); 
+            cbxCampo.Items.Add(categoriaItemCbx);
+            cbxCampo.Items.Add(descripcionCbx);
+
         }
 
         //metodo que centraliza el mostrar las listas de articulos.
@@ -153,6 +168,53 @@ namespace Winform_app
             {
 
                 throw ex;
+            }
+        }
+
+        private void cbxCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string seleccionado = cbxCampo.SelectedItem.ToString();
+
+            try
+            {
+                if (seleccionado == precioItemCbx)
+                {
+                    cbxCriterio.Items.Clear();
+                    cbxCriterio.Items.Add("Mayor a");
+                    cbxCriterio.Items.Add("Menor a");
+                    cbxCriterio.Items.Add("Igual a ");
+                }
+                else
+                {
+                    cbxCriterio.Items.Clear();
+                    cbxCriterio.Items.Add("Comienza con");
+                    cbxCriterio.Items.Add("Termina con");
+                    cbxCriterio.Items.Add("Contiene");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void btnFiltroAvanzado_Click(object sender, EventArgs e)
+        {
+            ArticuloBusiness business = new ArticuloBusiness();
+
+            try
+            {
+                string campo = cbxCampo.SelectedItem.ToString();
+                string criterio = cbxCampo.SelectedItem.ToString();
+                string filtro = txtFiltroAvanzado.Text;
+
+                dgvArticulos.DataSource = business.filtroAvanzado(campo,criterio, filtro);
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
             }
         }
     }
