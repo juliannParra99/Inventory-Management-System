@@ -50,6 +50,11 @@ namespace Winform_app
                 {
                     articulo = new Articulo();
                 }
+
+                if (validarCamposObligatorios())
+                {
+                    return;
+                }
                 articulo.Codigo = txtCodigo.Text;
                 articulo.Nombre= txtNombre.Text;
                 articulo.Descripcion = txtDescripcion.Text;
@@ -156,6 +161,45 @@ namespace Winform_app
 
                 
             }
+        }
+
+        //validacion precio
+        private bool validacionPrecio(string cadena)
+        {
+            foreach (char x in cadena)
+            {
+                if (!(char.IsNumber(x) || x == ',' ))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        //valida los campos obligatorios y los tipos de datos 
+        private bool validarCamposObligatorios()
+        {
+            if (string.IsNullOrEmpty(txtCodigo.Text))
+            {
+                MessageBox.Show("Por favor ingrese el codigo del articulo.");
+                return true;
+            }
+            if (string.IsNullOrEmpty(txtNombre.Text))
+            {
+                MessageBox.Show("Por favor ingrese el nombre del articulo.");
+                return true;
+            }
+            if (string.IsNullOrEmpty(txtPrecio.Text))
+            {
+                MessageBox.Show("Por favor ingrese el precio del articulo.");
+                return true;
+            }
+            if (!(validacionPrecio(txtPrecio.Text)))
+            {
+                MessageBox.Show("Solo son validos numeros y el signo de coma (,) para valores decimales al asignar el precio.");
+                return true;
+            }
+            return false;
         }
     }
 }

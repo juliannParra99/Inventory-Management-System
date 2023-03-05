@@ -29,7 +29,7 @@ namespace Winform_app
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvArticulos = new System.Windows.Forms.DataGridView();
             this.pbxArticulos = new System.Windows.Forms.PictureBox();
             this.btnAgregar = new System.Windows.Forms.Button();
@@ -44,14 +44,16 @@ namespace Winform_app
             this.txtFiltroAvanzado = new System.Windows.Forms.TextBox();
             this.btnFiltroAvanzado = new System.Windows.Forms.Button();
             this.lblFiltroAvanzado = new System.Windows.Forms.Label();
+            this.lblPrecio = new System.Windows.Forms.Label();
+            this.txtFiltroPrecio = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxArticulos)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvArticulos
             // 
-            dataGridViewCellStyle3.NullValue = null;
-            this.dgvArticulos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.NullValue = null;
+            this.dgvArticulos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvArticulos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvArticulos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvArticulos.Location = new System.Drawing.Point(35, 79);
@@ -103,7 +105,7 @@ namespace Winform_app
             // 
             // txtFiltro
             // 
-            this.txtFiltro.Location = new System.Drawing.Point(119, 42);
+            this.txtFiltro.Location = new System.Drawing.Point(87, 25);
             this.txtFiltro.Name = "txtFiltro";
             this.txtFiltro.Size = new System.Drawing.Size(161, 20);
             this.txtFiltro.TabIndex = 5;
@@ -112,7 +114,7 @@ namespace Winform_app
             // lblFiltro
             // 
             this.lblFiltro.AutoSize = true;
-            this.lblFiltro.Location = new System.Drawing.Point(69, 45);
+            this.lblFiltro.Location = new System.Drawing.Point(37, 28);
             this.lblFiltro.Name = "lblFiltro";
             this.lblFiltro.Size = new System.Drawing.Size(43, 13);
             this.lblFiltro.TabIndex = 6;
@@ -181,11 +183,30 @@ namespace Winform_app
             this.lblFiltroAvanzado.TabIndex = 13;
             this.lblFiltroAvanzado.Text = "Filtro:";
             // 
+            // lblPrecio
+            // 
+            this.lblPrecio.AutoSize = true;
+            this.lblPrecio.Location = new System.Drawing.Point(37, 56);
+            this.lblPrecio.Name = "lblPrecio";
+            this.lblPrecio.Size = new System.Drawing.Size(37, 13);
+            this.lblPrecio.TabIndex = 14;
+            this.lblPrecio.Text = "Precio";
+            // 
+            // txtFiltroPrecio
+            // 
+            this.txtFiltroPrecio.Location = new System.Drawing.Point(87, 53);
+            this.txtFiltroPrecio.Name = "txtFiltroPrecio";
+            this.txtFiltroPrecio.Size = new System.Drawing.Size(161, 20);
+            this.txtFiltroPrecio.TabIndex = 15;
+            this.txtFiltroPrecio.TextChanged += new System.EventHandler(this.txtFiltroPrecio_TextChanged);
+            // 
             // frmArticulos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.txtFiltroPrecio);
+            this.Controls.Add(this.lblPrecio);
             this.Controls.Add(this.lblFiltroAvanzado);
             this.Controls.Add(this.btnFiltroAvanzado);
             this.Controls.Add(this.txtFiltroAvanzado);
@@ -227,6 +248,8 @@ namespace Winform_app
         private System.Windows.Forms.TextBox txtFiltroAvanzado;
         private System.Windows.Forms.Button btnFiltroAvanzado;
         private System.Windows.Forms.Label lblFiltroAvanzado;
+        private System.Windows.Forms.Label lblPrecio;
+        private System.Windows.Forms.TextBox txtFiltroPrecio;
     }
 }
 

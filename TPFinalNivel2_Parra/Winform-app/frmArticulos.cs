@@ -18,7 +18,6 @@ namespace Winform_app
         private List<Articulo> articuloList;
 
         //atributos de items de comboBox
-        private string precioItemCbx;
         private string marcaItemCbx;
         private string categoriaItemCbx;
         private string descripcionCbx;
@@ -31,11 +30,9 @@ namespace Winform_app
         private void frmArticulos_Load(object sender, EventArgs e)
         {
             agregarArticulos();
-            precioItemCbx = "Precio";
             marcaItemCbx = "Marca";
             categoriaItemCbx = "Categoria";
             descripcionCbx = "Descripcion";
-            cbxCampo.Items.Add(precioItemCbx);
             cbxCampo.Items.Add(marcaItemCbx); 
             cbxCampo.Items.Add(categoriaItemCbx);
             cbxCampo.Items.Add(descripcionCbx);
@@ -112,11 +109,20 @@ namespace Winform_app
         {
             //obtiene el objeto de la fila seleccionada  de la dgvArticulos 
             Articulo articuloSeleccionado;
-            articuloSeleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+            try
+            {
+                articuloSeleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
 
-            frmAltaArticulo modificar = new frmAltaArticulo(articuloSeleccionado);
-            modificar.ShowDialog();
-            agregarArticulos();
+                frmAltaArticulo modificar = new frmAltaArticulo(articuloSeleccionado);
+                modificar.ShowDialog();
+                agregarArticulos();
+
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Por favor seleccione un registro para modificar.");
+            }
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -125,6 +131,11 @@ namespace Winform_app
             Articulo articuloSeleccionado;
             try
             {
+                if (dgvArticulos.CurrentRow == null)
+                {
+                    MessageBox.Show("Por favor seleccione un registro para eliminar.");
+                    return;
+                }
                 //se valida si realmente se quiere borrar el registro capturando el valor elegido en los botones del messageBox en la variable Resultado
                 DialogResult resultado = MessageBox.Show("¿Estas seguro que queres eliminar este registro?", "Eliminar Registro", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
@@ -171,20 +182,45 @@ namespace Winform_app
             }
         }
 
+        private void txtFiltroPrecio_TextChanged(object sender, EventArgs e)
+        {
+            List<Articulo> listaFiltrada;
+            string filtro = txtFiltroPrecio.Text;
+
+            try
+            {
+                if (!(validacionPrecio(filtro)))
+                {
+                    MessageBox.Show("Solo son validos numeros, y el signo de coma(,) para valores decimales.");
+                }
+                if (filtro != "" && validacionPrecio(filtro))
+                {
+                    listaFiltrada = articuloList.FindAll(x => x.Precio.ToString().ToUpper().Contains(filtro.ToUpper()));
+
+                }
+                else
+                {
+                    listaFiltrada = articuloList;
+                }
+
+                dgvArticulos.DataSource = null;
+                dgvArticulos.DataSource = listaFiltrada;
+                ocultarColumnas();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
         private void cbxCampo_SelectedIndexChanged(object sender, EventArgs e)
         {
             string seleccionado = cbxCampo.SelectedItem.ToString();
 
             try
             {
-                if (seleccionado == precioItemCbx)
-                {
-                    cbxCriterio.Items.Clear();
-                    cbxCriterio.Items.Add("Mayor a");
-                    cbxCriterio.Items.Add("Menor a");
-                    cbxCriterio.Items.Add("Igual a ");
-                }
-                else
+                if (seleccionado == marcaItemCbx || seleccionado == categoriaItemCbx || seleccionado == descripcionCbx)
                 {
                     cbxCriterio.Items.Clear();
                     cbxCriterio.Items.Add("Comienza con");
@@ -199,12 +235,46 @@ namespace Winform_app
             }
         }
 
+        private bool validarFiltro()
+        {
+            
+            if (cbxCampo.SelectedIndex < 0)
+            {
+                MessageBox.Show("Por favor, seleccione el campo para filtrar.");
+                return true;
+            }
+            if (cbxCriterio.SelectedIndex < 0)
+            {
+                MessageBox.Show("Por favor, seleccione el criterio para filtrar.");
+                return true;
+            }
+            
+            return false;
+        }
+
+        
+        private bool validacionPrecio(string cadena)
+        {
+            foreach (char x in cadena)
+            {
+                if (!(char.IsNumber(x) || x == ',' ))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        
+
+        
         private void btnFiltroAvanzado_Click(object sender, EventArgs e)
         {
             ArticuloBusiness business = new ArticuloBusiness();
 
             try
             {
+                if (validarFiltro())
+                    return;
                 string campo = cbxCampo.SelectedItem.ToString();
                 string criterio = cbxCampo.SelectedItem.ToString();
                 string filtro = txtFiltroAvanzado.Text;
@@ -217,5 +287,7 @@ namespace Winform_app
                 MessageBox.Show(ex.ToString());
             }
         }
+
+       
     }
 }

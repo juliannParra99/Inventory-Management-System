@@ -144,23 +144,7 @@ namespace Business
             {
                 string consulta = "select A.Codigo,A.Nombre, A.Descripcion, A.ImagenUrl, M.Descripcion marca, C.Descripcion categoria, A.Precio,A.IdCategoria,A.IdMarca,A.Id from Articulos as A , MARCAS as M, CATEGORIAS as C where A.IdMarca = M.Id and A.IdCategoria = C.Id And ";
 
-
-                if (campo == "Precio")
-                {
-                    switch (criterio)
-                    {
-                        case "Mayor a":
-                            consulta += "A.Precio >" +  filtro;
-                            break;
-                        case "Menor a":
-                            consulta += "A.Precio <" + filtro;
-                            break;
-                        default:
-                            consulta += "A.Precio =" + filtro;
-                            break;
-                    }
-                }
-                else if (campo == "Marca")
+                if (campo == "Marca")
                 {
                     switch (criterio)
                     {
@@ -245,10 +229,6 @@ namespace Business
             {
 
                 throw;
-            }
-            finally
-            {
-                data.cerrarConexion();
             }
             
         }
