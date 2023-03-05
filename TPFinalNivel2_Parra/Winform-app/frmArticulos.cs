@@ -163,7 +163,7 @@ namespace Winform_app
             {
                 if (filtro != "")
                 {
-                    listaFiltrada = articuloList.FindAll(x => x.Codigo.ToUpper().Contains(filtro.ToUpper()));
+                    listaFiltrada = articuloList.FindAll(x => x.Codigo.ToUpper().Contains(filtro.ToUpper()) || x.Nombre.ToUpper().Contains(filtro.ToUpper()));
 
                 }
                 else
@@ -288,6 +288,6 @@ namespace Winform_app
             }
         }
 
-       
+        
     }
 }
