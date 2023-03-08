@@ -30,9 +30,9 @@ namespace Winform_app
         private void frmArticulos_Load(object sender, EventArgs e)
         {
             agregarArticulos();
-            marcaItemCbx = "Marca";
-            categoriaItemCbx = "Categoria";
-            descripcionCbx = "Descripcion";
+            marcaItemCbx = "Brand";
+            categoriaItemCbx = "Category";
+            descripcionCbx = "Description";
             cbxCampo.Items.Add(marcaItemCbx); 
             cbxCampo.Items.Add(categoriaItemCbx);
             cbxCampo.Items.Add(descripcionCbx);
@@ -47,7 +47,10 @@ namespace Winform_app
             {
                 articuloList = business.listarArticulo();
                 dgvArticulos.DataSource = articuloList;
+                //muestra los precios de la grilla solo con dos decimales
+                decimalesPrecio();
                 cargarImagen(articuloList[0].ImagenUrl);
+
                 ocultarColumnas();
             }
             catch (Exception ex)
@@ -55,6 +58,12 @@ namespace Winform_app
 
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        //define la cantidad de decimales a mostrar
+        private void decimalesPrecio()
+        {
+            dgvArticulos.Columns["Precio"].DefaultCellStyle.Format = "0.00";
         }
 
         //cambia la imagen cuando cambia la celda seleccionada
@@ -121,7 +130,7 @@ namespace Winform_app
             catch (Exception)
             {
 
-                MessageBox.Show("Por favor seleccione un registro para modificar.");
+                MessageBox.Show("Please select a record to modify.");
             }
         }
 
@@ -133,11 +142,11 @@ namespace Winform_app
             {
                 if (dgvArticulos.CurrentRow == null)
                 {
-                    MessageBox.Show("Por favor seleccione un registro para eliminar.");
+                    MessageBox.Show("Please select a record to delete.");
                     return;
                 }
                 //se valida si realmente se quiere borrar el registro capturando el valor elegido en los botones del messageBox en la variable Resultado
-                DialogResult resultado = MessageBox.Show("¿Estas seguro que queres eliminar este registro?", "Eliminar Registro", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult resultado = MessageBox.Show("¿Are you sure you want to delete this record?", "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (resultado == DialogResult.Yes)
                 {
@@ -173,6 +182,7 @@ namespace Winform_app
 
                 dgvArticulos.DataSource = null;
                 dgvArticulos.DataSource = listaFiltrada;
+                decimalesPrecio();
                 ocultarColumnas();
             }
             catch (Exception ex)
@@ -205,6 +215,7 @@ namespace Winform_app
 
                 dgvArticulos.DataSource = null;
                 dgvArticulos.DataSource = listaFiltrada;
+                decimalesPrecio();
                 ocultarColumnas();
             }
             catch (Exception ex)
@@ -223,9 +234,9 @@ namespace Winform_app
                 if (seleccionado == marcaItemCbx || seleccionado == categoriaItemCbx || seleccionado == descripcionCbx)
                 {
                     cbxCriterio.Items.Clear();
-                    cbxCriterio.Items.Add("Comienza con");
-                    cbxCriterio.Items.Add("Termina con");
-                    cbxCriterio.Items.Add("Contiene");
+                    cbxCriterio.Items.Add("Starts with");
+                    cbxCriterio.Items.Add("Ends with");
+                    cbxCriterio.Items.Add("Contains");
                 }
             }
             catch (Exception ex)
@@ -240,12 +251,12 @@ namespace Winform_app
             
             if (cbxCampo.SelectedIndex < 0)
             {
-                MessageBox.Show("Por favor, seleccione el campo para filtrar.");
+                MessageBox.Show("Please select the field to filter.");
                 return true;
             }
             if (cbxCriterio.SelectedIndex < 0)
             {
-                MessageBox.Show("Por favor, seleccione el criterio para filtrar.");
+                MessageBox.Show("Select the filter criteria.");
                 return true;
             }
             

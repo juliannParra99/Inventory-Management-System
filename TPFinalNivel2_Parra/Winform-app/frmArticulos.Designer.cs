@@ -29,7 +29,7 @@ namespace Winform_app
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvArticulos = new System.Windows.Forms.DataGridView();
             this.pbxArticulos = new System.Windows.Forms.PictureBox();
             this.btnAgregar = new System.Windows.Forms.Button();
@@ -50,13 +50,14 @@ namespace Winform_app
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxArticulos)).BeginInit();
+            this.grpFiltroAvanzado.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvArticulos
             // 
-            dataGridViewCellStyle2.NullValue = null;
-            this.dgvArticulos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.NullValue = null;
+            this.dgvArticulos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvArticulos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvArticulos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvArticulos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -83,7 +84,7 @@ namespace Winform_app
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
             this.btnAgregar.TabIndex = 7;
-            this.btnAgregar.Text = "Agregar";
+            this.btnAgregar.Text = "New";
             this.btnAgregar.UseVisualStyleBackColor = true;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
@@ -93,7 +94,7 @@ namespace Winform_app
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(75, 23);
             this.btnModificar.TabIndex = 8;
-            this.btnModificar.Text = "Modificar";
+            this.btnModificar.Text = "Update";
             this.btnModificar.UseVisualStyleBackColor = true;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
@@ -103,33 +104,35 @@ namespace Winform_app
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(75, 23);
             this.btnEliminar.TabIndex = 9;
-            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.Text = "Delete";
             this.btnEliminar.UseVisualStyleBackColor = true;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // txtFiltro
             // 
+            this.txtFiltro.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFiltro.Location = new System.Drawing.Point(100, 24);
             this.txtFiltro.Name = "txtFiltro";
-            this.txtFiltro.Size = new System.Drawing.Size(161, 20);
+            this.txtFiltro.Size = new System.Drawing.Size(176, 20);
             this.txtFiltro.TabIndex = 0;
             this.txtFiltro.TextChanged += new System.EventHandler(this.txtFiltro_TextChanged);
             // 
             // lblFiltro
             // 
             this.lblFiltro.AutoSize = true;
+            this.lblFiltro.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFiltro.ForeColor = System.Drawing.Color.White;
-            this.lblFiltro.Location = new System.Drawing.Point(9, 31);
+            this.lblFiltro.Location = new System.Drawing.Point(8, 25);
             this.lblFiltro.Name = "lblFiltro";
-            this.lblFiltro.Size = new System.Drawing.Size(85, 13);
+            this.lblFiltro.Size = new System.Drawing.Size(86, 17);
             this.lblFiltro.TabIndex = 1;
-            this.lblFiltro.Text = "Codigo/Nombre:";
+            this.lblFiltro.Text = "Code/Name:";
             // 
             // cbxCampo
             // 
             this.cbxCampo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxCampo.FormattingEnabled = true;
-            this.cbxCampo.Location = new System.Drawing.Point(68, 352);
+            this.cbxCampo.Location = new System.Drawing.Point(56, 29);
             this.cbxCampo.Name = "cbxCampo";
             this.cbxCampo.Size = new System.Drawing.Size(121, 21);
             this.cbxCampo.TabIndex = 3;
@@ -139,7 +142,7 @@ namespace Winform_app
             // 
             this.cbxCriterio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxCriterio.FormattingEnabled = true;
-            this.cbxCriterio.Location = new System.Drawing.Point(254, 352);
+            this.cbxCriterio.Location = new System.Drawing.Point(260, 30);
             this.cbxCriterio.Name = "cbxCriterio";
             this.cbxCriterio.Size = new System.Drawing.Size(121, 21);
             this.cbxCriterio.TabIndex = 4;
@@ -147,77 +150,89 @@ namespace Winform_app
             // lblCampo
             // 
             this.lblCampo.AutoSize = true;
+            this.lblCampo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCampo.ForeColor = System.Drawing.Color.White;
-            this.lblCampo.Location = new System.Drawing.Point(19, 355);
+            this.lblCampo.Location = new System.Drawing.Point(8, 30);
             this.lblCampo.Name = "lblCampo";
-            this.lblCampo.Size = new System.Drawing.Size(43, 13);
+            this.lblCampo.Size = new System.Drawing.Size(42, 17);
             this.lblCampo.TabIndex = 9;
-            this.lblCampo.Text = "Campo:";
+            this.lblCampo.Text = "Field:";
             // 
             // lblCriterio
             // 
             this.lblCriterio.AutoSize = true;
+            this.lblCriterio.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCriterio.ForeColor = System.Drawing.Color.White;
-            this.lblCriterio.Location = new System.Drawing.Point(206, 355);
+            this.lblCriterio.Location = new System.Drawing.Point(189, 30);
             this.lblCriterio.Name = "lblCriterio";
-            this.lblCriterio.Size = new System.Drawing.Size(42, 13);
+            this.lblCriterio.Size = new System.Drawing.Size(65, 17);
             this.lblCriterio.TabIndex = 10;
-            this.lblCriterio.Text = "Criterio:";
+            this.lblCriterio.Text = "Criterion:";
             // 
             // txtFiltroAvanzado
             // 
-            this.txtFiltroAvanzado.Location = new System.Drawing.Point(432, 352);
+            this.txtFiltroAvanzado.Location = new System.Drawing.Point(446, 29);
             this.txtFiltroAvanzado.Name = "txtFiltroAvanzado";
             this.txtFiltroAvanzado.Size = new System.Drawing.Size(161, 20);
             this.txtFiltroAvanzado.TabIndex = 5;
             // 
             // btnFiltroAvanzado
             // 
-            this.btnFiltroAvanzado.Location = new System.Drawing.Point(608, 350);
+            this.btnFiltroAvanzado.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnFiltroAvanzado.Location = new System.Drawing.Point(626, 27);
             this.btnFiltroAvanzado.Name = "btnFiltroAvanzado";
             this.btnFiltroAvanzado.Size = new System.Drawing.Size(75, 23);
             this.btnFiltroAvanzado.TabIndex = 6;
-            this.btnFiltroAvanzado.Text = "Buscar";
+            this.btnFiltroAvanzado.Text = "Search";
             this.btnFiltroAvanzado.UseVisualStyleBackColor = true;
             this.btnFiltroAvanzado.Click += new System.EventHandler(this.btnFiltroAvanzado_Click);
             // 
             // lblFiltroAvanzado
             // 
             this.lblFiltroAvanzado.AutoSize = true;
+            this.lblFiltroAvanzado.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFiltroAvanzado.ForeColor = System.Drawing.Color.White;
-            this.lblFiltroAvanzado.Location = new System.Drawing.Point(397, 355);
+            this.lblFiltroAvanzado.Location = new System.Drawing.Point(397, 29);
             this.lblFiltroAvanzado.Name = "lblFiltroAvanzado";
-            this.lblFiltroAvanzado.Size = new System.Drawing.Size(32, 13);
+            this.lblFiltroAvanzado.Size = new System.Drawing.Size(43, 17);
             this.lblFiltroAvanzado.TabIndex = 13;
-            this.lblFiltroAvanzado.Text = "Filtro:";
+            this.lblFiltroAvanzado.Text = "Filter:";
             // 
             // lblPrecio
             // 
             this.lblPrecio.AutoSize = true;
+            this.lblPrecio.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPrecio.ForeColor = System.Drawing.Color.White;
-            this.lblPrecio.Location = new System.Drawing.Point(54, 55);
+            this.lblPrecio.Location = new System.Drawing.Point(50, 53);
             this.lblPrecio.Name = "lblPrecio";
-            this.lblPrecio.Size = new System.Drawing.Size(40, 13);
+            this.lblPrecio.Size = new System.Drawing.Size(44, 17);
             this.lblPrecio.TabIndex = 1;
-            this.lblPrecio.Text = "Precio:";
+            this.lblPrecio.Text = "Price:";
             // 
             // txtFiltroPrecio
             // 
             this.txtFiltroPrecio.Location = new System.Drawing.Point(100, 52);
             this.txtFiltroPrecio.Name = "txtFiltroPrecio";
-            this.txtFiltroPrecio.Size = new System.Drawing.Size(161, 20);
+            this.txtFiltroPrecio.Size = new System.Drawing.Size(176, 20);
             this.txtFiltroPrecio.TabIndex = 1;
             this.txtFiltroPrecio.TextChanged += new System.EventHandler(this.txtFiltroPrecio_TextChanged);
             // 
             // grpFiltroAvanzado
             // 
+            this.grpFiltroAvanzado.Controls.Add(this.btnFiltroAvanzado);
+            this.grpFiltroAvanzado.Controls.Add(this.lblFiltroAvanzado);
+            this.grpFiltroAvanzado.Controls.Add(this.txtFiltroAvanzado);
+            this.grpFiltroAvanzado.Controls.Add(this.lblCampo);
+            this.grpFiltroAvanzado.Controls.Add(this.cbxCampo);
+            this.grpFiltroAvanzado.Controls.Add(this.lblCriterio);
+            this.grpFiltroAvanzado.Controls.Add(this.cbxCriterio);
             this.grpFiltroAvanzado.ForeColor = System.Drawing.Color.White;
             this.grpFiltroAvanzado.Location = new System.Drawing.Point(12, 339);
             this.grpFiltroAvanzado.Name = "grpFiltroAvanzado";
             this.grpFiltroAvanzado.Size = new System.Drawing.Size(720, 70);
             this.grpFiltroAvanzado.TabIndex = 2;
             this.grpFiltroAvanzado.TabStop = false;
-            this.grpFiltroAvanzado.Text = "Filtro Avanzado";
+            this.grpFiltroAvanzado.Text = "Advanced Filter";
             // 
             // groupBox1
             // 
@@ -233,7 +248,7 @@ namespace Winform_app
             this.groupBox1.Size = new System.Drawing.Size(960, 311);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Articulos";
+            this.groupBox1.Text = "Articles";
             // 
             // frmArticulos
             // 
@@ -241,13 +256,6 @@ namespace Winform_app
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(66)))));
             this.ClientSize = new System.Drawing.Size(983, 450);
-            this.Controls.Add(this.lblFiltroAvanzado);
-            this.Controls.Add(this.btnFiltroAvanzado);
-            this.Controls.Add(this.txtFiltroAvanzado);
-            this.Controls.Add(this.lblCriterio);
-            this.Controls.Add(this.lblCampo);
-            this.Controls.Add(this.cbxCriterio);
-            this.Controls.Add(this.cbxCampo);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnAgregar);
@@ -263,10 +271,11 @@ namespace Winform_app
             this.Load += new System.EventHandler(this.frmArticulos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxArticulos)).EndInit();
+            this.grpFiltroAvanzado.ResumeLayout(false);
+            this.grpFiltroAvanzado.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

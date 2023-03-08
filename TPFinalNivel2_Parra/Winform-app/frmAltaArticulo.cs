@@ -29,7 +29,7 @@ namespace Winform_app
         public frmAltaArticulo( Articulo articulo)
         {
             InitializeComponent();
-            Text = "Modificar Articulo";
+            Text = "Modify Article";
             this.articulo = articulo;
         }
 
@@ -69,12 +69,12 @@ namespace Winform_app
                 if (articulo.Id != 0)
                 {
                     businessArticulo.modificarArticulo(articulo);
-                    MessageBox.Show("Modificado exitosamente");
+                    MessageBox.Show("Successfully modified.");
                 }
                 else
                 {
                     businessArticulo.agregarArticulo(articulo);
-                    MessageBox.Show("Agregado exitosamente");
+                    MessageBox.Show("Added successfully.");
                 }
                 
                 //Validacion para guardar imagen local en carpeta local 
@@ -115,7 +115,7 @@ namespace Winform_app
                     txtCodigo.Text = articulo.Codigo;
                     txtNombre.Text = articulo.Nombre;
                     txtDescripcion.Text = articulo.Descripcion;
-                    txtPrecio.Text = articulo.Precio.ToString();
+                    txtPrecio.Text = articulo.Precio.ToString("0.00");
                     txtUrlImagen.Text = articulo.ImagenUrl;
                     cargarImagen(articulo.ImagenUrl);
                     cbxCategoria.SelectedValue = articulo.Categoria.Id;
@@ -181,22 +181,22 @@ namespace Winform_app
         {
             if (string.IsNullOrEmpty(txtCodigo.Text))
             {
-                MessageBox.Show("Por favor ingrese el codigo del articulo.");
+                MessageBox.Show("Please enter the article code.");
                 return true;
             }
             if (string.IsNullOrEmpty(txtNombre.Text))
             {
-                MessageBox.Show("Por favor ingrese el nombre del articulo.");
+                MessageBox.Show("Please enter the name of the article.");
                 return true;
             }
             if (string.IsNullOrEmpty(txtPrecio.Text))
             {
-                MessageBox.Show("Por favor ingrese el precio del articulo.");
+                MessageBox.Show("Please enter the price of the item.");
                 return true;
             }
             if (!(validacionPrecio(txtPrecio.Text)))
             {
-                MessageBox.Show("Solo son validos numeros y el signo de coma (,) para valores decimales al asignar el precio.");
+                MessageBox.Show("Only numbers and the comma sign (,) for decimal values, are valid when assigning the price.");
                 return true;
             }
             return false;

@@ -144,14 +144,14 @@ namespace Business
             {
                 string consulta = "select A.Codigo,A.Nombre, A.Descripcion, A.ImagenUrl, M.Descripcion marca, C.Descripcion categoria, A.Precio,A.IdCategoria,A.IdMarca,A.Id from Articulos as A , MARCAS as M, CATEGORIAS as C where A.IdMarca = M.Id and A.IdCategoria = C.Id And ";
 
-                if (campo == "Marca")
+                if (campo == "Brand")
                 {
                     switch (criterio)
                     {
-                        case "Comienza con":
+                        case "Starts with":
                             consulta += "M.Descripcion like '" + filtro + "%' ";
                             break;
-                        case "Termina con":
+                        case "Ends with":
                             consulta += "M.Descripcion like '%" + filtro + "'";
                             break;
                         default:
@@ -159,14 +159,14 @@ namespace Business
                             break;
                     }
                 }
-                else if (campo == "Categoria")
+                else if (campo == "Category")
                 {
                     switch (criterio)
                     {
-                        case "Comienza con":
+                        case "Starts with":
                             consulta += " C.Descripcion like '" + filtro + "%' ";
                             break;
-                        case "Termina con":
+                        case "Ends with":
                             consulta += "C.Descripcion like '%" + filtro + "'";
                             break;
                         default:
@@ -178,10 +178,10 @@ namespace Business
                 {
                     switch (criterio)
                     {
-                        case "Comienza con":
+                        case "Starts with":
                             consulta += "A.Descripcion like '" + filtro + "%' ";
                             break;
-                        case "Termina con":
+                        case "Ends with":
                             consulta += "A.Descripcion like '%" + filtro + "'";
                             break;
                         default:
