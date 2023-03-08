@@ -29,7 +29,7 @@ namespace Winform_app
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvArticulos = new System.Windows.Forms.DataGridView();
             this.pbxArticulos = new System.Windows.Forms.PictureBox();
             this.btnAgregar = new System.Windows.Forms.Button();
@@ -55,8 +55,8 @@ namespace Winform_app
             // 
             // dgvArticulos
             // 
-            dataGridViewCellStyle1.NullValue = null;
-            this.dgvArticulos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.NullValue = null;
+            this.dgvArticulos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvArticulos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvArticulos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvArticulos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -70,9 +70,9 @@ namespace Winform_app
             // 
             // pbxArticulos
             // 
-            this.pbxArticulos.Location = new System.Drawing.Point(720, 78);
+            this.pbxArticulos.Location = new System.Drawing.Point(718, 78);
             this.pbxArticulos.Name = "pbxArticulos";
-            this.pbxArticulos.Size = new System.Drawing.Size(229, 207);
+            this.pbxArticulos.Size = new System.Drawing.Size(222, 207);
             this.pbxArticulos.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxArticulos.TabIndex = 1;
             this.pbxArticulos.TabStop = false;
@@ -212,7 +212,7 @@ namespace Winform_app
             // grpFiltroAvanzado
             // 
             this.grpFiltroAvanzado.ForeColor = System.Drawing.Color.White;
-            this.grpFiltroAvanzado.Location = new System.Drawing.Point(12, 328);
+            this.grpFiltroAvanzado.Location = new System.Drawing.Point(12, 339);
             this.grpFiltroAvanzado.Name = "grpFiltroAvanzado";
             this.grpFiltroAvanzado.Size = new System.Drawing.Size(720, 70);
             this.grpFiltroAvanzado.TabIndex = 2;
@@ -230,7 +230,7 @@ namespace Winform_app
             this.groupBox1.ForeColor = System.Drawing.Color.White;
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(968, 310);
+            this.groupBox1.Size = new System.Drawing.Size(960, 311);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Articulos";
@@ -240,7 +240,7 @@ namespace Winform_app
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(66)))));
-            this.ClientSize = new System.Drawing.Size(992, 450);
+            this.ClientSize = new System.Drawing.Size(983, 450);
             this.Controls.Add(this.lblFiltroAvanzado);
             this.Controls.Add(this.btnFiltroAvanzado);
             this.Controls.Add(this.txtFiltroAvanzado);
@@ -255,10 +255,11 @@ namespace Winform_app
             this.Controls.Add(this.grpFiltroAvanzado);
             this.Controls.Add(this.groupBox1);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(1008, 489);
-            this.MinimumSize = new System.Drawing.Size(1008, 489);
+            this.MaximumSize = new System.Drawing.Size(999, 489);
+            this.MinimumSize = new System.Drawing.Size(999, 489);
             this.Name = "frmArticulos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Inventory Management";
             this.Load += new System.EventHandler(this.frmArticulos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxArticulos)).EndInit();
