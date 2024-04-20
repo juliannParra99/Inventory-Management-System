@@ -1,6 +1,10 @@
 
 # Inventory Management System
 
+
+https://github.com/juliannParra99/Inventory-Management-System/assets/104667764/e5c54ec2-e984-4e9f-bff4-3533530bce85
+
+
 This project is an inventory management system developed in C# with .NET Framework, using WinForms as the user interface. The application allows users to perform CRUD (Create, Read, Update, Delete) operations on their inventory products, as well as perform advanced searches.
 
 
